@@ -1,6 +1,6 @@
 express = require("express")
 app = express()
-io = require("socket.io").listen(app)
+io = require("socket.io").listen(3333)
 swig = require("swig")
 cons = require("consolidate")
 redis = require("redis")
@@ -27,13 +27,29 @@ swig.init(
 	"tzOffset" : 0
 	)
 
-io.socket.on(
+io.sockets.on(
 	"connection"
 	(socket)->
 		socket.emit(
 			"news"
 			"new" : "NO NEWS IS GOOD NEWS"
 			)
+		socket.on(
+			"return msg"
+			(data)->
+				console.log(data)
+			)
+	console.log("a user has login")
 	)
+
+
 	
 #ADDED SOME USELESS ANNOTATION
+app.get(
+	"/"
+	(req,res)->
+		res.render(
+			"index.html"
+			"title" : "This is the Mustasched Title"
+			)
+	)

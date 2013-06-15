@@ -6,7 +6,7 @@
 
   app = express();
 
-  io = require("socket.io").listen(app);
+  io = require("socket.io").listen(3333);
 
   swig = require("swig");
 
@@ -36,9 +36,18 @@
     "tzOffset": 0
   });
 
-  io.socket.on("connection", function(socket) {
-    return socket.emit("news", {
+  io.sockets.on("connection", function(socket) {
+    socket.emit("news", {
       "new": "NO NEWS IS GOOD NEWS"
+    });
+    return socket.on("return msg", function(data) {
+      return console.log(data);
+    });
+  }, console.log("a user has login"));
+
+  app.get("/", function(req, res) {
+    return res.render("index.html", {
+      "title": "This is the Mustasched Title"
     });
   });
 
