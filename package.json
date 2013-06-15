@@ -1,0 +1,12 @@
+{
+	"name" : "Really" ,
+	"author" : "JimmyMan",
+	"version" : "0.0.1" ,
+	"dependencies" : {
+		"express" : "*",
+		"socket.io" : "*",
+		"swig" : "*" ,
+		"consolidate" : "*",
+		"redis" : "*"		
+	}
+}
